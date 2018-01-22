@@ -6,7 +6,16 @@ class GTLItem extends Component{
 
     render(){
         return(
-            <div></div>
+            <div>
+                <h6>{this.props.name}</h6>
+                <ul>
+                    {
+                        this.props.tasks.map((x)=>{
+                            return(<li>{x}</li>)
+                        })
+                    }
+                </ul>
+            </div>
         )
     }
 }

@@ -61,7 +61,6 @@ class GardenTaskOrganizer extends Component {
 
   handleChangeSelectedVegtables(){
     let arr = [];
-    console.log(document.list);
     for(let i = 0; i < document.Vegtables_list.length; i++){
       if(document.Vegtables_list[i].checked === true){
         arr.push(document.Vegtables_list.plants[i].value);
