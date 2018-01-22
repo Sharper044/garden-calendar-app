@@ -23,9 +23,9 @@ class ListHolder extends Component{
                     {
                         plantsObj.map(function(object){
                             return(
-                                <div>
+                                <div key={object.id}>
                                     <input type="checkbox" name="plants" value={object.id} onClick={clickHandler}/>
-                                    <label for={object.id}>{object.name}</label>
+                                    <label htmlFor={object.id}>{object.name}</label>
                                 </div>
                             )
                         })

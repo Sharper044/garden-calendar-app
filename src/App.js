@@ -53,10 +53,6 @@ class App extends Component {
     this.setState({cycles: cycle+1});
   }
 
-  // shouldComponentUpdate(){
-  //   return (this.state.cycles < 4 && this.state.lastFrost !=="");
-  // }
-
   render() {
     return (
       <div className="App">

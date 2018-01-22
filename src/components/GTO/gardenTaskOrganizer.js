@@ -4,7 +4,7 @@ import '../../reset.css';
 import './gardenTaskOrganizer.css';
 import ListHolder from '../listHolder/listHolder.js';
 import PlantMaker from '../PlantMaker/plantMaker.js';
-//import url from '../../api.js';
+import GTL from '../GTL/GTL.js';
 
 class GardenTaskOrganizer extends Component {
   constructor(props){
@@ -15,6 +15,7 @@ class GardenTaskOrganizer extends Component {
       selectedFruits: [],
       selectedFlowers: [],
       selectedHerbs: [],
+      selectedPlants:[],
       originalPlantsObj: this.props.originalPlantsObj,
       lastFrostUI: "",
       firstFrostUI: "",
@@ -24,7 +25,8 @@ class GardenTaskOrganizer extends Component {
       howOftenUI:"", 
       daysToMaturityUI:undefined, 
       stopPlantingUI:undefined, 
-      notesUI:''
+      notesUI:'',
+      view: 1
     }
 
     this.changeFrostDates=this.changeFrostDates.bind(this);
@@ -169,26 +171,34 @@ class GardenTaskOrganizer extends Component {
   }
 
   render() {
-    return (
-      <div>
-          <p>Welcome to Stuart Harper's</p>
-          <h1>Garden Task Organizer</h1>
-          <p>Welcome to the Garden Task Organizer or GTO presented by the Harper Family Homestead. This tool can help you plan out your year of gardening tasks. We take your location to find your local first and last frost dates; than you select which plants you wnat to grow. When you press go, your year's garden chores organized by week will appear.</p>
-          <p> The first and last frost dates that we have found for your position area as follows: </p>
-          <div>Last spring frost:<u>{this.props.lastFrost.substr(0,2)}/{this.props.lastFrost.substr(2,2)}</u></div>
-          <div>First fall frost:<u>{this.props.firstFrost.substr(0,2)}/{this.props.firstFrost.substr(2,2)}</u></div>
-          <p>Select what you want to grow below</p>
-          <ListHolder catagory='Vegtables' handleChange={this.handleChangeSelectedVegtables} originalPlantsObj={this.state.originalPlantsObj}/>
-          <ListHolder catagory='Fruits' handleChange={this.handleChangeSelectedFruits} originalPlantsObj={this.state.originalPlantsObj}/>
-          <ListHolder catagory='Herbs' handleChange={this.handleChangeSelectedHerbs} originalPlantsObj={this.state.originalPlantsObj}/>
-          <ListHolder catagory='Flowers' handleChange={this.handleChangeSelectedFlowers} originalPlantsObj={this.state.originalPlantsObj}/>
-          <input type="submit" value="Create Garden Task List"/>
+    if(this.state.view===1){
+      return (
+        <div>
+            <p>Welcome to Stuart Harper's</p>
+            <h1>Garden Task Organizer</h1>
+            <p>Welcome to the Garden Task Organizer or GTO presented by the Harper Family Homestead. This tool can help you plan out your year of gardening tasks. We take your location to find your local first and last frost dates; than you select which plants you wnat to grow. When you press go, your year's garden chores organized by week will appear.</p>
+            <p> The first and last frost dates that we have found for your position area as follows: </p>
+            <div>Last spring frost:<u>{this.props.lastFrost.substr(0,2)}/{this.props.lastFrost.substr(2,2)}</u></div>
+            <div>First fall frost:<u>{this.props.firstFrost.substr(0,2)}/{this.props.firstFrost.substr(2,2)}</u></div>
+            <p>Select what you want to grow below</p>
+            <ListHolder catagory='Vegtables' handleChange={this.handleChangeSelectedVegtables} originalPlantsObj={this.state.originalPlantsObj}/>
+            <ListHolder catagory='Fruits' handleChange={this.handleChangeSelectedFruits} originalPlantsObj={this.state.originalPlantsObj}/>
+            <ListHolder catagory='Herbs' handleChange={this.handleChangeSelectedHerbs} originalPlantsObj={this.state.originalPlantsObj}/>
+            <ListHolder catagory='Flowers' handleChange={this.handleChangeSelectedFlowers} originalPlantsObj={this.state.originalPlantsObj}/>
+            <input type="submit" value="Create Garden Task List" onClick={()=>this.setState({view:2, selectedPlants : this.state.selectedVegtables.concat(this.state.selectedHerbs, this.state.selectedFruits, this.state.selectedFlowers)})}/>
 
-          <p>Not seeing something you want to grow? Enter it here:</p>
-          <PlantMaker handleChangesNewPlantCatagory={this.handleChangesNewPlantCatagory} handleChangesNewPlantDTM={this.handleChangesNewPlantDTM} handleChangesNewPlantFirstPlanting={this.handleChangesNewPlantFirstPlanting} handleChangesNewPlantHowOften={this.handleChangesNewPlantHowOften} handleChangesNewPlantName={this.handleChangesNewPlantName} handleChangesNewPlantNotes={this.handleChangesNewPlantNotes} handleChangesNewPlantStopPlanting={this.handleChangesNewPlantStopPlanting} createNewPlant={this.createNewPlant}/>
-
-      </div>
-    );
+            <p>Not seeing something you want to grow? Enter it here:</p>
+            <PlantMaker handleChangesNewPlantCatagory={this.handleChangesNewPlantCatagory} handleChangesNewPlantDTM={this.handleChangesNewPlantDTM} handleChangesNewPlantFirstPlanting={this.handleChangesNewPlantFirstPlanting} handleChangesNewPlantHowOften={this.handleChangesNewPlantHowOften} handleChangesNewPlantName={this.handleChangesNewPlantName} handleChangesNewPlantNotes={this.handleChangesNewPlantNotes} handleChangesNewPlantStopPlanting={this.handleChangesNewPlantStopPlanting} createNewPlant={this.createNewPlant}/>
+        </div>
+      )
+    }
+    else if(this.state.view===2){
+      return(
+        <div>
+          <GTL firstFrost={this.props.firstFrost} lastFrost={this.props.lastFrost} originalPlantsObj={this.state.originalPlantsObj} selectedPlants={this.state.selectedPlants}/>
+        </div>
+      );
+    }
   }
 }
   
