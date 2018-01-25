@@ -6,6 +6,7 @@ import ListHolder from '../listHolder/listHolder.js';
 import PlantMaker from '../PlantMaker/plantMaker.js';
 import GTL from '../GTL/GTL.js';
 
+
 class GardenTaskOrganizer extends Component {
   constructor(props){
     super(props);
@@ -172,28 +173,48 @@ class GardenTaskOrganizer extends Component {
   render() {
     if(this.state.view===1){
       return (
-        <div>
-            <p>Welcome to Stuart Harper's</p>
+        <div className="mainDiv">
+        <link href="https://fonts.googleapis.com/css?family=Bevan" rel="stylesheet"/>
+          <div className="headModule">
+            <p className="subtitle">Welcome to Harper Family Homestead's</p>
             <h1>Garden Task Organizer</h1>
-            <p>Welcome to the Garden Task Organizer or GTO presented by the Harper Family Homestead. This tool can help you plan out your year of gardening tasks. We take your location to find your local first and last frost dates; than you select which plants you wnat to grow. When you press go, your year's garden chores organized by week will appear.</p>
-            <p> The first and last frost dates that we have found for your position area as follows: </p>
-            <div>Last spring frost:<u>{this.props.lastFrost.substr(0,2)}/{this.props.lastFrost.substr(2,2)}</u></div>
-            <div>First fall frost:<u>{this.props.firstFrost.substr(0,2)}/{this.props.firstFrost.substr(2,2)}</u></div>
-            <p>Select what you want to grow below</p>
-            <ListHolder catagory='Vegtables' handleChange={this.handleChangeSelectedVegtables} originalPlantsObj={this.state.originalPlantsObj}/>
-            <ListHolder catagory='Fruits' handleChange={this.handleChangeSelectedFruits} originalPlantsObj={this.state.originalPlantsObj}/>
-            <ListHolder catagory='Herbs' handleChange={this.handleChangeSelectedHerbs} originalPlantsObj={this.state.originalPlantsObj}/>
-            <ListHolder catagory='Flowers' handleChange={this.handleChangeSelectedFlowers} originalPlantsObj={this.state.originalPlantsObj}/>
-            <input type="submit" value="Create Garden Task List" onClick={()=>this.setState({view:2, selectedPlants : this.state.selectedVegtables.concat(this.state.selectedHerbs, this.state.selectedFruits, this.state.selectedFlowers)})}/>
+            <div className="deviderLine"/>
+            <p className="mainText">Welcome to the Garden Task Organizer or GTO presented by the Harper Family Homestead. This tool has been designed to help you in planing your own bio-intensive, sucsession crop planting to maximize the output of your garden. We take your location to find your local first and last frost dates, then you select which plants you want to grow. When you press the Create Garden Task List button, your year's garden tasks organized by week will appear.</p>
+          </div>
+            
+            <div className="dateModule">
+              <p className="FrostHeader"> The first and last frost dates that we have found for your position area as follows: </p>
+              <div className="dateSubDiv">
+                <div className="date">Last spring frost:<u>{this.props.lastFrost.substr(0,2)}/{this.props.lastFrost.substr(2,2)}</u></div>
+                <div className="date">First fall frost:<u>{this.props.firstFrost.substr(0,2)}/{this.props.firstFrost.substr(2,2)}</u></div>
+              </div>
+            </div>
+            
+            <div className="plantsModule">
+              <p className="plantsHeader">Select what you want to grow below</p>
+              <div className="listHolderContainer">
+                <ListHolder catagory='Vegtables' handleChange={this.handleChangeSelectedVegtables} originalPlantsObj={this.state.originalPlantsObj}/>
+                <ListHolder catagory='Fruits' handleChange={this.handleChangeSelectedFruits} originalPlantsObj={this.state.originalPlantsObj}/>
+                <ListHolder catagory='Herbs' handleChange={this.handleChangeSelectedHerbs} originalPlantsObj={this.state.originalPlantsObj}/>
+                <ListHolder catagory='Flowers' handleChange={this.handleChangeSelectedFlowers} originalPlantsObj={this.state.originalPlantsObj}/>
+              </div>
+              <input className="submitButton1" type="submit" value="Create Garden Task List" onClick={()=>this.setState({view:2, selectedPlants : this.state.selectedVegtables.concat(this.state.selectedHerbs, this.state.selectedFruits, this.state.selectedFlowers)})}/>
+            </div>
 
-            <p>Not seeing something you want to grow? Enter it here:</p>
-            <PlantMaker handleChangesNewPlantCatagory={this.handleChangesNewPlantCatagory} handleChangesNewPlantDTM={this.handleChangesNewPlantDTM} handleChangesNewPlantFirstPlanting={this.handleChangesNewPlantFirstPlanting} handleChangesNewPlantHowOften={this.handleChangesNewPlantHowOften} handleChangesNewPlantName={this.handleChangesNewPlantName} handleChangesNewPlantNotes={this.handleChangesNewPlantNotes} handleChangesNewPlantStopPlanting={this.handleChangesNewPlantStopPlanting} createNewPlant={this.createNewPlant}/>
+            <div className="plantMakerModule">
+              <p className="plantMakerHeader">Not seeing something you want to grow? Enter it here:</p>
+              <PlantMaker handleChangesNewPlantCatagory={this.handleChangesNewPlantCatagory} handleChangesNewPlantDTM={this.handleChangesNewPlantDTM} handleChangesNewPlantFirstPlanting={this.handleChangesNewPlantFirstPlanting} handleChangesNewPlantHowOften={this.handleChangesNewPlantHowOften} handleChangesNewPlantName={this.handleChangesNewPlantName} handleChangesNewPlantNotes={this.handleChangesNewPlantNotes} handleChangesNewPlantStopPlanting={this.handleChangesNewPlantStopPlanting} createNewPlant={this.createNewPlant}/>
+            </div>
+
+            <div className="deviderLine"/>
+
+            <p className="copyright">©2018 by Stuart Harper. All rights reserved. Harper Family Homestead and the Garden Task Organizer are properties of Stuart Harper.</p> 
         </div>
       )
     }
     else if(this.state.view===2){
       return(
-        <div>
+        <div className="mainDiv">
           <GTL firstFrost={this.props.firstFrost} lastFrost={this.props.lastFrost} originalPlantsObj={this.state.originalPlantsObj} selectedPlants={this.state.selectedPlants}/>
         </div>
       );

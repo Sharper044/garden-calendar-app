@@ -1,0 +1,31 @@
+.headModule{
+    margin: 30px auto;
+    width: 80%;
+}
+
+.subtitle{
+    font-size: 85%;
+    text-align: center;
+}
+
+h1{
+    font-size: 50px;
+    font-family: 'Bevan', cursive;
+    text-align: center;
+    margin: 20px auto;
+    color: green;
+    -webkit-text-stroke: 0.25px beige;
+}
+
+.deviderLine{
+    width: auto;
+    height: 1px;
+    border: 1px solid green;
+}
+
+.mainText{
+    width: 90%;
+    margin: 15px auto;
+    text-indent: 50px;
+    line-height: 1.2;
+}

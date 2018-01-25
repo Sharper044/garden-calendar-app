@@ -2,4 +2,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  height:100vh;
+  background-image: url('./rucola-salad-plant-leaf.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100vh;
+  color: beige;
+  -webkit-text-stroke: 0.15px black;
 }
